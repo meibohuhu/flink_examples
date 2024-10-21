@@ -11,6 +11,11 @@ import java.time.LocalDate;
 import java.time.Period;
 
 /** Use arbitrary libraries to perform streaming ETL i.e. convert records into JSON. */
+/*
+/*
+ObjectMapper is used primarily for converting between Java objects and JSON strings, as well as for creating complex JSON structures. It operates at a higher abstraction level, allowing easy conversion of entire objects.
+JsonObject is used to work with JSON data directly, providing methods to manipulate JSON structures without the need for Java objects.
+ */
 public class Example_03_DataStream_ETL {
 
   public static void main(String[] args) throws Exception {

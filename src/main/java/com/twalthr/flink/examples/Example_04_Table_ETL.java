@@ -21,15 +21,16 @@ public class Example_04_Table_ETL {
         env.fromValues(
                 row(12L, "Alice", LocalDate.of(1984, 3, 12)),
                 row(32L, "Bob", LocalDate.of(1990, 10, 14)),
-                row(7L, "Kyle", LocalDate.of(1979, 2, 23)))
+                row(7L, "Kyle", LocalDate.of(1979, 2, 23))
+                )
             .as("c_id", "c_name", "c_birthday")
             .select(
-                jsonObject(
+                jsonObject(   // transforms it into a JSON format, create JSON objects from tabular data
                     JsonOnNull.NULL,
-                    "name",
-                    $("c_name"),
-                    "age",
-                    timestampDiff(TimePointUnit.YEAR, $("c_birthday"), currentDate())));
+                        "name", $("c_name"),  // Maps the c_name column to the "name" field in the JSON
+                      "age", timestampDiff(TimePointUnit.YEAR, $("c_birthday"), currentDate())
+                )
+            );
 
     env.toChangelogStream(t).print();
 
